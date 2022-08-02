@@ -4,16 +4,13 @@ from nextcord.abc import GuildChannel
 from nextcord.ext import commands
 
 intents = nextcord.Intents.all()
-client = commands.Bot(command_prefix=")", intents=intents)
+client = commands.Bot(command_prefix="접두사 입력란", intents=intents)
 
 @client.event
 async def on_ready():
-    i = datetime.datetime.now()
     print(f"{client.user.name}봇은 준비가 완료 되었습니다.")
     print(f"[!] 참가 중인 서버 : {len(client.guilds)}개의 서버에 참여 중")
     print(f"[!] 이용자 수 : {len(client.users)}와 함께하는 중")
-    await client.change_presence(activity=nextcord.Activity(type=nextcord.ActivityType.watching, name=f"{len(client.guilds)}개의 서버를"))
-    print(i)
 
 @client.slash_command(name="로그설정",description="특정채널에 로그를 기록하는 메세지를 보낼 수 있습니다")
 async def hello(inter: nextcord.Interaction, 로그: str = SlashOption(description="무엇을 로깅할까요?", choices=["메세지 수정", "메세지 삭제", "음성채널"]), 채널: GuildChannel = SlashOption(description = "등록할 채널을 선택해주세요!",channel_types = [ChannelType.text])) -> None:
@@ -91,3 +88,4 @@ async def on_voice_state_update(member, before, after):
                 embed.add_field(name="입장한 채널", value=f"<#{after.channel.id}>", inline=True)
                 embed.set_footer(text="Bot made by", icon_url="푸터 URL")
                 await ch.send(embed=embed)
+bot.run('토큰 입력란')
