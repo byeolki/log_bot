@@ -88,4 +88,5 @@ async def on_voice_state_update(member, before, after):
                 embed.add_field(name="입장한 채널", value=f"<#{after.channel.id}>", inline=True)
                 embed.set_footer(text="Bot made by", icon_url="푸터 URL")
                 await ch.send(embed=embed)
-bot.run('토큰 입력란')
+                
+client.run('토큰 입력란')
